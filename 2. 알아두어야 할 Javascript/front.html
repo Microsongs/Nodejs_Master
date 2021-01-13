@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Ajax axios를 사용하깅 위한 코드-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        axios.get("https://www.zerocho.com/api/get")
+            .then((result) => {
+                console.log("result");
+                console.log(result.data);   //{}
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        (async () => {
+            try{
+                const result = await axios.get("https://www.zerocho.com/api/get");
+                console.log(result);
+                console.log(result.data);   //{}
+            }
+            catch(error){
+                console.error(error);
+            }
+        })
+    </script>
+    <script>
+        const formData = new FormData();
+        formData.append('name','zerocho');
+        formData.append('item','orange');
+        formData.append('item','melon');
+        formData.has('item');   //true
+        formData.has('money');  //false
+        formData.get('item');   //orange
+        formData.getAll('item');    //['orange','melon']
+        formData.append('test',['hi','zero']);  
+        formData.get('test');   //hi, zero
+        formData.delete('test');    
+        formData.get('test');   //null
+        formData.set('item','apple'); 
+        formData.getAll('item');    //['apple']
+    </script>
+
+    <script>
+        (async () => {
+            try{
+                const result = await axios.post('https://www.zerocho.com/api/post/json',{
+                    name: 'zerocho',
+                    birth: 1994,
+                });
+                console.log(result);
+                console.log(result.data);   //{}
+            }catch(error){
+                console.error(error);
+            }
+        })();
+    </script>
+
+</head>
+<body>
+    hi
+</body>
+</html>

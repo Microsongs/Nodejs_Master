@@ -18,7 +18,9 @@ http.createServer(async (req, res) => {
         const data = await fs.readFile('./about.html');
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         return res.end(data);
+        // 사용자를 가져옴
       } else if (req.url === '/users') {
+        // json으로 보낼 때는 JSON.stringify로 보내야 함
         res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
         return res.end(JSON.stringify(users));
       }

@@ -1,9 +1,17 @@
+
+
 const express = require('express');
 const path = require('path');
+
+// dotenv같은 것은 최대한 위로 올림 
+const dotenv = require('dotenv');
+dotenv.config();
+
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const app = express();
+
 
 app.set('port',process.env.PORT || 3000);
 // 파일들의 실행 순서도 중요함
@@ -16,12 +24,12 @@ app.use('/',express.static(path.join(__dirname, 'public')));
 // 쿠키를 파싱
 app.use(cookieParser());
 // signedCookies에서 사용
-app.use(cookieParser('zerochopassword'));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 // 세션 사용
 app.use(session({
     resave: false,
     saveUnitialized: false,
-    secret: 'zerochopassword',
+    secret: process.env.COOKIE_SECRET,
     cookie:{
         httpOnly: true,
     },

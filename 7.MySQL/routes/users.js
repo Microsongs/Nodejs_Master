@@ -22,6 +22,7 @@ router.route('/')
         married: req.body.married,
       });
       console.log(user);
+      // 페이지를 보내는 것이 아니면 json을 보냄
       res.status(201).json(user);
     } catch (err) {
       console.error(err);
@@ -31,6 +32,8 @@ router.route('/')
 
 router.get('/:id/comments', async (req, res, next) => {
   try {
+    // 댓글을 가져올 때 -> get
+    // 댓글을 통해 사용자 / 사용자를 통해 댓글을 가져올 수 있음
     const comments = await Comment.findAll({
       include: {
         model: User,
